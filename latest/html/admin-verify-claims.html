@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Claims - Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin-styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="/images/lost-found-logo.png" alt="Lost & Found" class="logo">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-links">
+                    <button class="nav-link" onclick="window.location.href='admin-dashboard.html'">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">Dashboard</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='admin-manage-reports.html'">
+                        <span class="nav-icon">📋</span>
+                        <span class="nav-text">Manage Reports</span>
+                    </button>
+                    
+                    <button class="nav-link active" onclick="window.location.href='admin-verify-claims.html'">
+                        <span class="nav-icon">✅</span>
+                        <span class="nav-text">Verify Claims</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='admin-messages.html'">
+                        <span class="nav-icon">💬</span>
+                        <span class="nav-text">Messages</span>
+                    </button>
+                </div>
+                
+                <div class="nav-footer">
+                    <button class="nav-link logout-link" onclick="logout()">
+                        <span class="nav-icon">🚪</span>
+                        <span class="nav-text">Logout</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="header">
+                <h1>Verify Claims</h1>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </header>
+            
+            <div class="page-content">
+                <div class="action-buttons">
+                    <button class="action-btn primary" onclick="addSampleClaim()">
+                        <span class="btn-icon">➕</span>
+                        Add Sample Claim
+                    </button>
+                </div>
+                
+                <div class="claims-container">
+                    <div class="claims-list" id="claims-list">
+                        <!-- Claims will be populated by JavaScript -->
+                    </div>
+                    
+                    <div class="claim-details">
+                        <div id="claim-details-content">
+                            <div class="claim-header">
+                                <div class="claim-avatar">👤</div>
+                                <div>
+                                    <h3 id="claim-description">Select a claim to view details</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="security-question">
+                                <h3>Security Question:</h3>
+                                <p id="security-question">No claim selected</p>
+                                <h3>Answer:</h3>
+                                <p id="security-answer">No claim selected</p>
+                            </div>
+                            
+                            <div class="claim-actions">
+                                <button class="btn-secondary" onclick="rejectClaim()" id="reject-btn" disabled>Reject</button>
+                                <button class="btn-primary" onclick="acceptClaim()" id="accept-btn" disabled>Accept</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/database/supabase-config.js"></script>
+    <script src="/js/auth-check.js"></script>
+    <script src="/js/admin-verify-claims-script.js"></script>
+</body>
+</html>

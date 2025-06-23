@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Item - Lost & Found</title>
+    <link rel="stylesheet" href="/css/user-styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <img src="/images/lost-found-logo.png" alt="Lost & Found" style="width: 120px; height: 60px; object-fit: contain;">
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-links">
+                    <button class="nav-link" onclick="window.location.href='user-home.html'">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Home</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='user-my-reports.html'">
+                        <span class="nav-icon">👤</span>
+                        <span class="nav-text">My Reports</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='user-notifications.html'">
+                        <span class="nav-icon">🔔</span>
+                        <span class="nav-text">Notifications</span>
+                        <span class="notification-badge" id="notification-count">3</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='user-messages.html'">
+                        <span class="nav-icon">✉️</span>
+                        <span class="nav-text">Messages</span>
+                        <span class="message-badge" id="message-count">2</span>
+                    </button>
+                    
+                    <button class="nav-link active" onclick="window.location.href='user-report-item.html'">
+                        <span class="nav-icon">❗</span>
+                        <span class="nav-text">Report Item</span>
+                    </button>
+                </div>
+                
+                <div class="nav-footer">
+                    <button class="nav-link logout-link" onclick="logout()">
+                        <span class="nav-icon">🚪</span>
+                        <span class="nav-text">Logout</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Report Item</h1>
+            </div>
+            
+            <div class="content-section">
+                <div class="report-form-container">
+                    <form id="report-form" class="report-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="item-type">Item Type</label>
+                                <select id="item-type" name="item-type" required>
+                                    <option value="">Select item type</option>
+                                    <option value="lost">Lost Item</option>
+                                    <option value="found">Found Item</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="item-category">Category</label>
+                                <select id="item-category" name="item-category" required>
+                                    <option value="">Select category</option>
+                                    <option value="electronics">Electronics</option>
+                                    <option value="clothing">Clothing</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="documents">Documents</option>
+                                    <option value="keys">Keys</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="item-name">Item Name/Description</label>
+                            <input type="text" id="item-name" name="item-name" placeholder="e.g., iPhone 13, Blue Wallet, etc." required oninput="validateItemNameRealTime(this)">
+                            <div id="item-name-error" style="color: #ef4444; font-size: 0.875rem; margin-top: 0.25rem; display: none;"></div>
+                            <small style="color: #6b7280; font-size: 0.875rem;">Must contain at least one letter. Numbers or special characters only are not allowed.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="item-description">Detailed Description</label>
+                            <textarea id="item-description" name="item-description" rows="4" placeholder="Provide detailed description including color, brand, distinctive features, etc." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="security-question">Security Question</label>
+                            <input type="text" id="security-question" name="security-question" placeholder="e.g., What color is the item? What's written on it?" required>
+                            <small style="color: #6b7280; font-size: 0.875rem;">This question will be used to verify claims. Make it specific to your item.</small>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="campus">Mapúa Campus</label>
+                                <select id="campus" name="campus" required>
+                                    <option value="">Select campus</option>
+                                    <option value="Intramuros">Intramuros</option>
+                                    <option value="Makati">Makati</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="date-incident">Date</label>
+                                <input type="date" id="date-incident" name="date-incident" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="item-image">Item Image (Optional)</label>
+                            <input type="file" id="item-image" name="item-image" accept=".jpg,.jpeg,.png" onchange="validateImageFile(this)">
+                            <small style="color: #6b7280; font-size: 0.875rem;">Only JPG and PNG files are allowed</small>
+                            <div id="image-error" style="color: #ef4444; font-size: 0.875rem; margin-top: 0.25rem; display: none;"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-info">Contact Information</label>
+                            <input type="text" id="contact-info" name="contact-info" placeholder="Phone number or email (optional)">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="secondary-btn" onclick="resetReportForm()">
+                                Clear Form
+                            </button>
+                            <button type="submit" class="primary-btn">
+                                Submit Report
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/database/supabase-config.js"></script>
+    <script src="/js/auth-check.js"></script>
+    <script src="/js/user-report-item-script.js"></script>
+</body>
+</html>

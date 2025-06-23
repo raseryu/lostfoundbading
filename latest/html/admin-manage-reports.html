@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Reports - Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin-styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="/images/lost-found-logo.png" alt="Lost & Found" class="logo">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-links">
+                    <button class="nav-link" onclick="window.location.href='admin-dashboard.html'">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">Dashboard</span>
+                    </button>
+                    
+                    <button class="nav-link active" onclick="window.location.href='admin-manage-reports.html'">
+                        <span class="nav-icon">📋</span>
+                        <span class="nav-text">Manage Reports</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='admin-verify-claims.html'">
+                        <span class="nav-icon">✅</span>
+                        <span class="nav-text">Verify Claims</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='admin-messages.html'">
+                        <span class="nav-icon">💬</span>
+                        <span class="nav-text">Messages</span>
+                    </button>
+                </div>
+                
+                <div class="nav-footer">
+                    <button class="nav-link logout-link" onclick="logout()">
+                        <span class="nav-icon">🚪</span>
+                        <span class="nav-text">Logout</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="header">
+                <h1>Manage Reports</h1>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </header>
+            
+            <div class="page-content">
+                <div class="action-buttons">
+                    <button class="action-btn primary" onclick="showAddReportModal()">
+                        <span class="btn-icon">➕</span>
+                        Add Report
+                    </button>
+                    <button class="action-btn" onclick="exportReports()">
+                        <span class="btn-icon">📄</span>
+                        Export Report
+                    </button>
+                    <button class="action-btn" onclick="deleteSelectedReport()">
+                        <span class="btn-icon">🗑</span>
+                        Delete Report
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="reports-table">
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Name/Description</th>
+                                <th>Ref. No.</th>
+                                <th>Date Found</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reports-table-body">
+                            <!-- Reports will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Report Modal -->
+    <div id="add-report-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Report</h2>
+                <button class="close-btn" onclick="closeAddReportModal()">&times;</button>
+            </div>
+            <form id="add-report-form" onsubmit="addReport(event)">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Item Name/Description</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="ref_no">Reference Number (Optional)</label>
+                    <input type="text" id="ref_no" name="ref_no" placeholder="Auto-generated if empty">
+                </div>
+                <div class="form-group">
+                    <label for="date_found">Date Found</label>
+                    <input type="date" id="date_found" name="date_found" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" required>
+                        <option value="pending">Pending</option>
+                        <option value="claimed">Claimed</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeAddReportModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/database/supabase-config.js"></script>
+    <script src="/js/auth-check.js"></script>
+    <script src="/js/admin-manage-reports-script.js"></script>
+</body>
+</html>

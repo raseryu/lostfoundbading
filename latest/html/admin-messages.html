@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin-styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="/images/lost-found-logo.png" alt="Lost & Found" class="logo">
+                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-links">
+                    <button class="nav-link" onclick="window.location.href='admin-dashboard.html'">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">Dashboard</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='admin-manage-reports.html'">
+                        <span class="nav-icon">📋</span>
+                        <span class="nav-text">Manage Reports</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='admin-verify-claims.html'">
+                        <span class="nav-icon">✅</span>
+                        <span class="nav-text">Verify Claims</span>
+                    </button>
+                    
+                    <button class="nav-link active" onclick="window.location.href='admin-messages.html'">
+                        <span class="nav-icon">💬</span>
+                        <span class="nav-text">Messages</span>
+                    </button>
+                </div>
+                
+                <div class="nav-footer">
+                    <button class="nav-link logout-link" onclick="logout()">
+                        <span class="nav-icon">🚪</span>
+                        <span class="nav-text">Logout</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="header">
+                <h1>Messages</h1>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </header>
+            
+            <div class="page-content">
+                <div class="messages-container">
+                    <div class="conversations-list">
+                        <h3>Conversations</h3>
+                        <div id="conversations-list">
+                            <!-- Conversations will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="chat-area">
+                        <div class="chat-header">
+                            <div class="chat-avatar">👤</div>
+                            <h3 id="chat-user-name">Select a conversation</h3>
+                        </div>
+                        
+                        <div class="messages-area" id="messages-area">
+                            <div class="no-conversation">
+                                <p>Select a conversation to start messaging</p>
+                            </div>
+                        </div>
+                        
+                        <div class="message-input-area">
+                            <input 
+                                type="text" 
+                                id="message-input" 
+                                placeholder="Type a message..." 
+                                onkeypress="handleMessageKeyPress(event)"
+                                disabled
+                            >
+                            <button class="send-btn" onclick="sendMessage()" disabled>➤</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/database/supabase-config.js"></script>
+    <script src="/js/auth-check.js"></script>
+</body>
+</html>

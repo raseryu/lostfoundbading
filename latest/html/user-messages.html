@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Lost & Found</title>
+    <link rel="stylesheet" href="/css/user-styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <img src="/images/lost-found-logo.png" alt="Lost & Found" style="width: 120px; height: 60px; object-fit: contain;">
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-links">
+                    <button class="nav-link" onclick="window.location.href='user-home.html'">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Home</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='user-my-reports.html'">
+                        <span class="nav-icon">👤</span>
+                        <span class="nav-text">My Reports</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='user-notifications.html'">
+                        <span class="nav-icon">🔔</span>
+                        <span class="nav-text">Notifications</span>
+                        <span class="notification-badge" id="notification-count">3</span>
+                    </button>
+                    
+                    <button class="nav-link active" onclick="window.location.href='user-messages.html'">
+                        <span class="nav-icon">✉️</span>
+                        <span class="nav-text">Messages</span>
+                        <span class="message-badge" id="message-count">2</span>
+                    </button>
+                    
+                    <button class="nav-link" onclick="window.location.href='user-report-item.html'">
+                        <span class="nav-icon">❗</span>
+                        <span class="nav-text">Report Item</span>
+                    </button>
+                </div>
+                
+                <div class="nav-footer">
+                    <button class="nav-link logout-link" onclick="logout()">
+                        <span class="nav-icon">🚪</span>
+                        <span class="nav-text">Logout</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Messages</h1>
+            </div>
+            
+            <div class="content-section">
+                <div class="messages-container" id="messages-list">
+                    <!-- Messages will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/database/supabase-config.js"></script>
+    <script src="/js/auth-check.js"></script>
+    <script src="/js/user-messages-script.js"></script>
+</body>
+</html>
